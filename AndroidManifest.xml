@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="jp.sakumon.moridai"
+    android:versionCode="6"
+    android:versionName="2.0" >
+
+    <uses-sdk
+        android:minSdkVersion="14"
+        android:targetSdkVersion="17" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name="jp.sakumon.moridai.MainActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="jp.sakumon.moridai.LoginActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="jp.sakumon.moridai.FragmentAnswer"
+            android:configChanges="keyboardHidden|orientation"
+            android:label="@string/title_activity_fragment_answer"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="jp.sakumon.moridai.FragmentTest"
+            android:configChanges="keyboardHidden|orientation"
+            android:label="@string/title_activity_fragment_test"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="jp.sakumon.moridai.FragmentMake"
+            android:configChanges="keyboardHidden|orientation"
+            android:label="@string/title_activity_fragment_make"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="jp.sakumon.moridai.QuestionAnswerActivity"
+            android:label="@string/app_name"
+            android:windowSoftInputMode="adjustPan"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="jp.sakumon.moridai.AnswerResultActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="jp.sakumon.moridai.TestListActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="jp.sakumon.moridai.TestAnswerActivity"
+            android:label="@string/app_name"
+            android:windowSoftInputMode="adjustPan"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="jp.sakumon.moridai.QuestionMakeActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" >
+        </activity>
+        <activity
+            android:name="jp.sakumon.moridai.TestResultActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="jp.sakumon.moridai.QuestionConfirmActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="jp.sakumon.moridai.AddressSignActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" >
+        </activity>
+        <activity
+            android:name="jp.sakumon.moridai.AnswerCategoryListActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="jp.sakumon.moridai.TestGradeListActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+        </activity>
+    </application>
+
+</manifest>

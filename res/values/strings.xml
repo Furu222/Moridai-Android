@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">もりけん</string>
+    <string name="title_section2">試験をする</string>
+    <string name="title_section1">学習する</string>
+    <string name="title_section3">作問する</string>
+    <string name="menu_settings">設定</string>
+    <string name="LoginButton">ログイン</string>
+    <string name="title_activity_fragment_answer">カテゴリーを選択</string>
+    <string name="title_activity_fragment_test">試験に挑戦</string>
+    <string name="title_activity_fragment_make">問題を作成</string>
+    <string name="title_activity_answer_question">問題を解く</string>
+    <string name="title_activity_">問題を選ぶ</string>
+    <string name="title_text">もりけん入門クイズ</string>
+    <string name="sub_title">盛岡もの識り検定\n×\n岩手県立大学</string>
+    <string name="moriken">もりけんイメージキャラクター</string>
+    <string name="fuki">あなたは盛岡をどのくらい知っていますか？\nレッツチャレンジ！</string>
+    <string name="start_button">スタート</string>
+    <string name="question_label">問題</string>
+    <string name="question">問題文</string>
+    <string name="option1">選択肢1</string>
+    <string name="option2">選択肢2</string>
+    <string name="option3">選択肢3</string>
+    <string name="option4">選択肢4</string>
+    <string name="answer_flag_view">正解 or 不正解</string>
+    <string name="answer_label">正解は</string>
+    <string name="category_back_button_text">違うカテゴリーを選ぶ</string>
+    <string name="answer_next_button_text">もう一問解く</string>
+    <string name="fragment_test_label">試験モードで全問題にチャレンジ！\nあなたは何問解けますか？</string>
+    <string name="fragment_test_button">試験にチャレンジ</string>
+    <string name="fragment_make_label">オリジナル問題を作成してみよう！</string>
+    <string name="fragment_make_button">新しく問題を作成する</string>
+    <string name="questionSmallLabel">（140文字以内）</string>
+    <string name="answer_small_label">（30文字以内）</string>
+    <string name="description_small_label">（140文字以内）</string>
+    <string name="category_label">カテゴリー</string>
+
+    <string-array name="category_list">
+        <item>盛岡の食</item>
+        <item>盛岡の名所</item>
+        <item>盛岡の方言</item>
+        <item>盛岡の偉人</item>
+        <item>盛岡の産業</item>
+        <item>その他</item>
+    </string-array>
+
+    <string name="spinnerprompt">カテゴリーを選んで下さい</string>
+    <string name="answer_make_label">答え</string>
+    <string name="answer_make_text_hint">答えを入力してください。</string>
+    <string name="description_make_label">解説</string>
+    <string name="make_check">作成完了</string>
+    <string name="question_text_hint">問題文を入力してください。</string>
+    <string name="description_text_hint">解説文を入力してください。</string>
+    <string name="test_check">試験終了</string>
+    <string name="result_image">結果発表</string>
+    <string name="result_you_label">あなたは</string>
+    <string name="result_correct_label">正解しました！</string>
+    <string name="question_list_label">不正解問題一覧</string>
+    <string name="test_result_back">試験結果に戻る</string>
+    <string name="test_end">TOPへ</string>
+    <string name="address_sign_button">検定を受験する方はこちら</string>
+    <string name="form_label">もりけん3級応募フォーム</string>
+    <string name="send_button">応募する</string>
+    <string name="name_label">氏名</string>
+    <string name="name">氏名を入力してください</string>
+    <string name="address_label">住所</string>
+    <string name="address">住所を入力してください</string>
+    <string name="post_code_label">郵便番号</string>
+    <string name="post_code">郵便番号を入力してください</string>
+    <string name="post_code_small_Label">(ハイフンなし)</string>
+    <string name="address_search_button">住所検索</string>
+    <string name="attend_button">個人情報の取り扱いについて</string>
+    <string name="attend_text"><u>※応募する前に必ずお読みください</u></string>
+    <string name="attend_alert_message">盛岡もの識り検定3級以上を受験しようと考えている方は是非下記の入力フォームより氏名・郵便番号・住所を入力し、応募してください。応募して頂いた個人情報につきましては、盛岡商工会議所に管理していただき盛岡検定の受験要項などの資料送付などに活用させていただきます。\n<u>2013年11月9日</u>までに入力フォームより応募していただきますと、団体受験料で盛岡もの識り検定を受験することができお得です！希望者は是非応募していただきますようよろしくお願いします。</string>
+    <string name="send_user_data_message">応募が完了しました。\nもし一週間以内に資料が届かない場合、お手数ですが<u>info@sakumon.jp</u>までご連絡下さい。\nOKを押すと前の画面に戻ります。"</string>
+    <string name="news">試験モードに合格すると、今ならもりけん受験料割引に！（11月9日まで）</string>
+    <string name="frag_news">今ならもりけん受験料割引キャンペーン実施中！\n試験モードに合格してお得にもりけんを受験しよう！\n（11月9日まで）</string>
+    <string name="single_answer_label">解答</string>
+    <string name="single_answer_check_label">ここに入力した答えが表示されます</string>
+    <string name="single_answer_button">解答を確定する</string>
+
+</resources>

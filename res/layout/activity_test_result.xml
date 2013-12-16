@@ -1,0 +1,97 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".TestResultActivity" >
+
+    <ImageView
+        android:id="@+id/resultImage"
+        android:layout_width="130dp"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:contentDescription="@string/result_image"
+        android:src="@drawable/result" />
+    
+    <TextView
+        android:id="@+id/resultYouLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/rightCount"
+        android:layout_toLeftOf="@+id/resultImage"
+        android:text="@string/result_you_label"
+        android:textColor="@color/white" />
+
+    <TextView
+        android:id="@+id/rightCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/resultImage"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@+id/resultYouLabel"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/red" />
+    
+    <TextView
+        android:id="@+id/resultCorrectLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/rightCount"
+        android:layout_alignBottom="@+id/rightCount"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="12dp"
+        android:layout_toLeftOf="@+id/rightCount"
+        android:text="@string/result_correct_label"
+        android:textColor="@color/white" />
+
+    <TextView
+        android:id="@+id/resultText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rightCount"
+        android:layout_centerHorizontal="true"
+        android:layout_alignLeft="@+id/resultYouLabel"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="21dp"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/darkorange" />
+    
+    <TextView
+        android:id="@+id/questionListLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/resultImage"
+        android:layout_below="@+id/resultText"
+        android:layout_marginTop="20dp"
+        android:text="@string/question_list_label"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/white" />
+
+    <ListView
+        android:id="@+id/questionList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/questionListLabel"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@+id/addressSignButton"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp" >
+
+    </ListView>
+
+    <Button
+        android:id="@+id/addressSignButton"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_centerHorizontal="true"
+        android:text="@string/address_sign_button"
+        android:textColor="@color/white" />
+
+</RelativeLayout>

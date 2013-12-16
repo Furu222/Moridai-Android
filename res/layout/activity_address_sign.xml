@@ -1,0 +1,149 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_weight="1"
+    android:fillViewport="true" >
+
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:context=".AddressSignActivity" >
+
+        <TextView
+            android:id="@+id/FormLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:text="@string/form_label"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/white"
+            android:focusable="true"
+            android:focusableInTouchMode="true" >
+            <requestFocus />
+        </TextView>
+
+        <Button
+            android:id="@+id/attendButton"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/FormLabel"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="15dp"
+            android:text="@string/attend_button"
+            android:textColor="@color/white" />
+
+        <TextView
+            android:id="@+id/attendText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/attendButton"
+            android:layout_centerHorizontal="true"
+            android:text="@string/attend_text"
+            android:textColor="@color/red" />
+
+        <TextView
+            android:id="@+id/nameLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/attendText"
+            android:layout_marginLeft="22dp"
+            android:layout_marginTop="20dp"
+            android:text="@string/name_label"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/white" />
+
+        <EditText
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/nameLabel"
+            android:layout_below="@+id/nameLabel"
+            android:background="@drawable/rounded_corner"
+            android:ems="11"
+            android:hint="@string/name"
+            android:inputType="textPersonName" />
+
+        <TextView
+            android:id="@+id/postCodeLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/name"
+            android:layout_below="@+id/name"
+            android:layout_marginTop="17dp"
+            android:text="@string/post_code_label"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/white" />
+
+        <TextView
+            android:id="@+id/postCodeSmallLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/postCodeLabel"
+            android:layout_toRightOf="@+id/postCodeLabel"
+            android:text="@string/post_code_small_Label"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="@color/white" />
+
+        <EditText
+            android:id="@+id/postCode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/postCodeLabel"
+            android:layout_below="@+id/postCodeLabel"
+            android:background="@drawable/rounded_corner"
+            android:ems="11"
+            android:maxLength="7"
+            android:hint="@string/post_code"
+            android:inputType="number" />
+
+        <Button
+            android:id="@+id/addressSearchButton"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/postCode"
+            android:layout_below="@+id/postCode"
+            android:text="@string/address_search_button"
+            android:textColor="@color/white" />
+
+        <TextView
+            android:id="@+id/addressLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/addressSearchButton"
+            android:layout_below="@+id/addressSearchButton"
+            android:layout_marginTop="7dp"
+            android:text="@string/address_label"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/white" />
+
+        <EditText
+            android:id="@+id/address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/addressLabel"
+            android:layout_below="@+id/addressLabel"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/rounded_corner"
+            android:hint="@string/address"
+            android:inputType="textPostalAddress"
+            android:maxWidth="275dp" />
+
+        <Button
+            android:id="@+id/sendButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/address"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="15dp"
+            android:text="@string/send_button"
+            android:textColor="@color/white" />
+        
+    </RelativeLayout>
+
+</ScrollView>

@@ -1,0 +1,74 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LoginActivity" >
+    
+    <TextView
+        android:id="@+id/TitleText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="32dp"
+        android:text="@string/title_text"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:textSize="25sp"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+    
+    <TextView
+        android:id="@+id/SubTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/TitleText"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:text="@string/sub_title"
+        android:textColor="@color/peru"
+        android:gravity="center"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <ImageButton
+        android:id="@+id/startButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/SubTitle"
+        android:layout_marginTop="20dp"
+        android:contentDescription="@string/start_button"
+        android:background="@drawable/loginbutton_color" />
+
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/startButton"
+        android:layout_alignRight="@+id/startButton"
+        android:layout_marginTop="50dp"
+        android:contentDescription="@string/fuki"
+        android:src="@drawable/fuki" />
+
+    <ImageView
+        android:id="@+id/moriken"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/imageView1"
+        android:layout_toRightOf="@+id/imageView1"
+        android:layout_marginLeft="15dp"
+        android:contentDescription="@string/moriken"
+        android:src="@drawable/moriken" />
+
+<!--     <TextView -->
+<!--         android:id="@+id/news" -->
+<!--         android:layout_width="wrap_content" -->
+<!--         android:layout_height="wrap_content" -->
+<!--         android:layout_below="@+id/startButton" -->
+<!--         android:layout_centerHorizontal="true" -->
+<!--         android:layout_marginLeft="40dp" -->
+<!--         android:layout_marginTop="10dp" -->
+<!--         android:text="@string/news" -->
+<!--         android:textColor="@color/yellow" -->
+<!--         android:textAppearance="?android:attr/textAppearanceSmall" /> -->
+
+</RelativeLayout>

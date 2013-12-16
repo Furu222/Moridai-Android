@@ -1,0 +1,123 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".QuestionAnswerActivity" >
+    <ImageView
+        android:id="@+id/question_area"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:contentDescription="@string/question_label"
+        android:src="@drawable/question_area" />
+
+    <ImageButton
+        android:id="@+id/option1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/question_area"
+        android:layout_below="@+id/question_area"
+        android:layout_marginTop="18dp"
+        android:contentDescription="@string/option1"
+        android:background="@drawable/optionbutton1_color" />
+
+    <ImageButton
+        android:id="@+id/option2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/option1"
+        android:layout_below="@+id/option1"
+        android:contentDescription="@string/option2"
+        android:background="@drawable/optionbutton2_color" />
+
+    <ImageButton
+        android:id="@+id/option3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/option2"
+        android:layout_below="@+id/option2"
+        android:contentDescription="@string/option3"
+        android:background="@drawable/optionbutton3_color" />
+
+    <ImageButton
+        android:id="@+id/option4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/option3"
+        android:layout_centerHorizontal="true"
+        android:contentDescription="@string/option4"
+        android:background="@drawable/optionbutton4_color" />
+
+    <ScrollView 
+        android:id="@+id/questionScrollView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/question_area"
+        android:layout_alignRight="@+id/question_area"
+        android:layout_alignBottom="@+id/question_area"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignTop="@+id/question_area"
+        android:fillViewport="true" >
+        
+            <TextView
+                android:id="@+id/question"
+                android:paddingLeft="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+    </ScrollView>
+
+    <TextView
+        android:id="@+id/option_text2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/option2"
+        android:layout_alignRight="@+id/option2"
+        android:layout_alignLeft="@+id/option2"
+        android:layout_marginTop="1dp"
+        android:layout_marginLeft="40dp"
+        android:layout_centerHorizontal="true"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/option_text3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/option3"
+        android:layout_alignRight="@+id/option3"
+        android:layout_alignLeft="@+id/option3"
+        android:layout_marginTop="1dp"
+        android:layout_marginLeft="40dp"
+        android:layout_centerHorizontal="true"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/option_text4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/option4"
+        android:layout_alignRight="@+id/option4"
+        android:layout_alignLeft="@+id/option4"
+        android:layout_marginTop="1dp"
+        android:layout_marginLeft="40dp"
+        android:layout_centerHorizontal="true"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/option_text1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/option1"
+        android:layout_alignRight="@+id/option1"
+        android:layout_alignLeft="@+id/option1"
+        android:layout_marginTop="1dp"
+        android:layout_marginLeft="40dp"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+</RelativeLayout>
