@@ -11,12 +11,12 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageButton;
 
-public class LoginActivity extends Activity implements OnClickListener{
+public class TopActivity extends Activity implements OnClickListener{
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_login);
+		setContentView(R.layout.activity_top);
 		
 		// ClicKListenerをセット
 		ImageButton startButton = (ImageButton)findViewById(R.id.startButton);
