@@ -3,17 +3,17 @@ package jp.sakumon.moridai;
 import java.util.HashMap;
 import java.util.Random;
 
+import jp.sakumon.moridai.MyJsonHttpResponseHandler.MyJsonResponseCallback;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.loopj.android.http.AsyncHttpClient;
-import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
 import android.os.Bundle;
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.util.SparseArray;
 import android.view.KeyEvent;
@@ -63,91 +63,112 @@ public class TestListActivity extends Activity implements DialogListener{
 			
 			String url;
 			if (year == 0){ // 入門編の場合
-				url = "http://n0.x0.to/rskweb/moridai/test.json";
+				url = "http://sakumon.jp/app/maker/moridai/test.json";
 			}else{
-				url = "http://n0.x0.to/rskweb/moridai/pasttest/" + grade + "/" + year + ".json";
+				url = "http://sakumon.jp/app/maker/moridai/pasttest/" + grade + "/" + year + ".json";
 			}
 			
-			client.get(url, new MyJsonResponseHandler(this){
-				@Override
-				public void onSuccess(JSONObject json){
-					// 通信成功時の処理
-					try {
-						JSONArray rootArray = json.getJSONArray("response");
-						optionNum = new Integer[rootArray.length()][4]; // 選択肢番号配列のNew宣言
-						
-						for (int i = 0; i < rootArray.length(); i++){
-							JSONObject jsonObject = rootArray.getJSONObject(i);
-							JSONObject questionObject = jsonObject.getJSONObject("MoridaiQuestion");
-							
-							HashMap<String, String> data = new HashMap<String, String>(); // 一次元配列。問題データ1問を格納
-							
-							String format;
-							if (year != 0){ // 過去問の場合はフォーマットをセット
-								format = questionObject.getString("format");
-							}else{ // 入門編の場合はMultiple-choiceに
-								format = "multiple-choice";
-							}
-							
-							if (format.equals("multiple-choice")){ // 多肢選択式の場合
-								// 選択肢をランダムにする
-								Random rand = new Random();
-								// 配列の初期化
-								for (int j = 0; j < 4; j++){
-									if (j == 0){
-										optionNum[i][j] = rand.nextInt(4) + 1;
-									}else{
-										optionNum[i][j] = 0; 
-									}
-								}
-								while(optionNum[i][1] == 0 || optionNum[i][1] == optionNum[i][0]){
-									optionNum[i][1] = rand.nextInt(4) + 1;
-								}
-								while(optionNum[i][2] == 0 || optionNum[i][2] == optionNum[i][0] || optionNum[i][2] == optionNum[i][1]){
-									optionNum[i][2] = rand.nextInt(4) + 1;
-								}
-								for (int j = 1; j < 5; j++){
-									if (j != optionNum[i][0] && j != optionNum[i][1] && j != optionNum[i][2]){
-										optionNum[i][3] = j;
-										break;
-									}
-								}
-								// 選択肢を格納
-								data.put("option1", questionObject.getString("option1"));
-								data.put("option2", questionObject.getString("option2"));
-								data.put("option3", questionObject.getString("option3"));
-								data.put("option4", questionObject.getString("option4"));
-								data.put("answer_option", String.valueOf(0)); // ユーザの解答情報
-							}else{ // 一問一答の場合
-								data.put("answer_word", "");
-							}
-								
-							// 共通データを連想配列に格納
-							data.put("id", questionObject.getString("id"));
-							data.put("question", questionObject.getString("question"));
-							data.put("right_answer", questionObject.getString("right_answer"));
-							data.put("description", questionObject.getString("description"));
-							data.put("category_id", questionObject.getString("category_id"));
-							data.put("category_name", questionObject.getString("category_name"));
-							data.put("format", format); // 問題毎の形式を記録
-							data.put("answer_flag", String.valueOf(-1)); // 0:不回答、1：正解、-1：無回答
-							
-							rootData.put(i, data);
-						}
-						
-						TestData testData = TestData.getInstance(); // テストデータクラスを読み込み
-						testData.setRootData(rootData); // クラスに値を保存
-						testData.setOptionNum(optionNum);
-						
-						setContentsListView(); // ListViewにデータを入れる
-					} catch (JSONException e) {
-					    DialogSwitch = "ErrorList";
-					    String title = "Error";
-			            String message = "何らかのエラーが発生しました。お手数ですがもう一度やり直して下さい。";
-			            showDialog(title, message, 0);
-					}
-				}
-			});
+			client.get(url, new MyJsonHttpResponseHandler(new MyJsonResponseCallback() {
+
+                @Override
+                public void onStart() {
+                    // TODO Auto-generated method stub
+                    
+                }
+
+                @Override
+                public void onSuccess(JSONObject json) {
+                 // 通信成功時の処理
+                    try {
+                        JSONArray rootArray = json.getJSONArray("response");
+                        optionNum = new Integer[rootArray.length()][4]; // 選択肢番号配列のNew宣言
+                        
+                        for (int i = 0; i < rootArray.length(); i++){
+                            JSONObject jsonObject = rootArray.getJSONObject(i);
+                            JSONObject questionObject = jsonObject.getJSONObject("MoridaiQuestion");
+                            
+                            HashMap<String, String> data = new HashMap<String, String>(); // 一次元配列。問題データ1問を格納
+                            
+                            String format;
+                            if (year != 0){ // 過去問の場合はフォーマットをセット
+                                format = questionObject.getString("format");
+                            }else{ // 入門編の場合はMultiple-choiceに
+                                format = "multiple-choice";
+                            }
+                            
+                            if (format.equals("multiple-choice")){ // 多肢選択式の場合
+                                // 選択肢をランダムにする
+                                Random rand = new Random();
+                                // 配列の初期化
+                                for (int j = 0; j < 4; j++){
+                                    if (j == 0){
+                                        optionNum[i][j] = rand.nextInt(4) + 1;
+                                    }else{
+                                        optionNum[i][j] = 0; 
+                                    }
+                                }
+                                while(optionNum[i][1] == 0 || optionNum[i][1] == optionNum[i][0]){
+                                    optionNum[i][1] = rand.nextInt(4) + 1;
+                                }
+                                while(optionNum[i][2] == 0 || optionNum[i][2] == optionNum[i][0] || optionNum[i][2] == optionNum[i][1]){
+                                    optionNum[i][2] = rand.nextInt(4) + 1;
+                                }
+                                for (int j = 1; j < 5; j++){
+                                    if (j != optionNum[i][0] && j != optionNum[i][1] && j != optionNum[i][2]){
+                                        optionNum[i][3] = j;
+                                        break;
+                                    }
+                                }
+                                // 選択肢を格納
+                                data.put("option1", questionObject.getString("option1"));
+                                data.put("option2", questionObject.getString("option2"));
+                                data.put("option3", questionObject.getString("option3"));
+                                data.put("option4", questionObject.getString("option4"));
+                                data.put("answer_option", String.valueOf(0)); // ユーザの解答情報
+                            }else{ // 一問一答の場合
+                                data.put("answer_word", "");
+                            }
+                                
+                            // 共通データを連想配列に格納
+                            data.put("id", questionObject.getString("id"));
+                            data.put("question", questionObject.getString("question"));
+                            data.put("right_answer", questionObject.getString("right_answer"));
+                            data.put("description", questionObject.getString("description"));
+                            data.put("category_id", questionObject.getString("category_id"));
+                            data.put("category_name", questionObject.getString("category_name"));
+                            data.put("format", format); // 問題毎の形式を記録
+                            data.put("answer_flag", String.valueOf(-1)); // 0:不回答、1：正解、-1：無回答
+                            
+                            rootData.put(i, data);
+                        }
+                        
+                        TestData testData = TestData.getInstance(); // テストデータクラスを読み込み
+                        testData.setRootData(rootData); // クラスに値を保存
+                        testData.setOptionNum(optionNum);
+                        
+                        setContentsListView(); // ListViewにデータを入れる
+                    } catch (JSONException e) {
+                        DialogSwitch = "ErrorList";
+                        String title = "Error";
+                        String message = "何らかのエラーが発生しました。お手数ですがもう一度やり直して下さい。";
+                        showDialog(title, message, 0);
+                    }
+                }
+
+                @Override
+                public void onFailure(Throwable e, String response) {
+                    DialogSwitch = "ErrorList";
+                    String title = "Error";
+                    String message = "エラーが発生しました。お手数ですが電波状況が良いところでもう一度操作をやり直してみて下さい。";
+                    showDialog(title, message, 0);
+                }
+
+                @Override
+                public void onFinish() {
+                    // TODO Auto-generated method stub
+                    
+                }
+			}, this, 0, 1));
 		}else{ // TestDataがある場合は、Viewにセット
 			setContentsListView(); // ListViewにデータを入れる
 		}
@@ -253,17 +274,9 @@ public class TestListActivity extends Activity implements DialogListener{
 		// プリファレンスからユーザIDを呼び出し
 		Integer userId = new GetSharedPreferences().getUserId(this);
 		SparseArray<HashMap<String, String>> questionData = new SparseArray<HashMap<String,String>>();
-		// プログレスダイアログ
-		ProgressDialog progressDialog = new ProgressDialog(this);
-		progressDialog.setTitle("ネットワークに接続中です");
-		progressDialog.setMessage("しばらくお待ちください");
-		progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER); // プログレスダイアログのスタイルを円スタイルに設定
-		// プログレスダイアログのキャンセルが可能かどうかを設定（バックボタンでダイアログをキャンセルできないようにする）
-        progressDialog.setCancelable(false);
-        // プログレスダイアログを表示
-        progressDialog.show();
         
-		for (int i = 0; i < size; i++){
+		// エラーがでた場合はループ抜けるように
+		for (int i = 0; i < size && DialogSwitch.equals("finish"); i++){
 			Integer answer_flag = Integer.parseInt(rootData.get(i).get("answer_flag"));
 			
 			if (answer_flag != -1){ // 無回答じゃない場合、集計する
@@ -283,37 +296,53 @@ public class TestListActivity extends Activity implements DialogListener{
 				params.put("answer_type", "1");
 				params.put("client_type", "Android");
 				
-				String url = "http://n0.x0.to/rskweb/moridai/answer_check.json";
+				String url = "http://sakumon.jp/app/maker/moridai/answer_check.json";
 				
-				client.post(url, params, new JsonHttpResponseHandler(){
-					@Override
-					public void onSuccess(JSONObject json){
-						// 通信成功時の処理
-						try {
-							String response = json.getString("response"); // サーバからの結果
-							if (response.equals("Error")){ // 回答情報登録できないとき（サーバ側のエラー）
-							    DialogSwitch = "Error";
-	                            String message = "サーバへのアクセスに失敗しました。お手数ですがやり直してみて下さい。";
-	                            showDialog("Error", message, 0);
-							}else if (response.equals("Data is Empty")){ // 回答情報登録できないとき（プログラム側のエラー）
-							    DialogSwitch = "Error";
-	                            String message = "データが送られていません。お手数ですが最初からやり直してみて下さい。";
-	                            showDialog("Error", message, 0);
-							}
-						} catch (JSONException e) {
-						    DialogSwitch = "Error";
-	                        String message = "何らかのエラーが発生しました。お手数ですがもう一度やり直して下さい。";
-	                        showDialog("Error", message, 0);
-						}
-					}
-					
-					@Override
-					public void onFailure(Throwable e, String response){
-					    DialogSwitch = "Error";
-	                    String message = "エラーが発生しました。お手数ですが電波状況が良いところでもう一度操作をやり直してみて下さい。";
-	                    showDialog("Error", message, 0);
-					}
-				});
+				client.post(url, params, new MyJsonHttpResponseHandler(new MyJsonResponseCallback() {
+
+                    @Override
+                    public void onStart() {
+                        // TODO Auto-generated method stub
+                        
+                    }
+
+                    @Override
+                    public void onSuccess(JSONObject json) {
+                        // 通信成功時の処理
+                        try {
+                            String response = json.getString("response"); // サーバからの結果
+                            String message = "";
+                            if (response.equals("Error")){ // 回答情報登録できないとき（サーバ側のエラー）
+                                DialogSwitch = "Error";
+                                message = "サーバへのアクセスに失敗しました。お手数ですがやり直してみて下さい。";
+                            }else if (response.equals("Data is Empty")){ // 回答情報登録できないとき（プログラム側のエラー）
+                                DialogSwitch = "Error";
+                                message = "データが送られていません。お手数ですが最初からやり直してみて下さい。";
+                            }
+                            if (!message.equals("")){ // メッセージがある場合はダイアログ表示
+                                showDialog("Error", message, 0);
+                            }
+                        } catch (JSONException e) {
+                            DialogSwitch = "Error";
+                            String message = "何らかのエラーが発生しました。お手数ですがもう一度やり直して下さい。";
+                            showDialog("Error", message, 0);
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Throwable e, String response) {
+                        DialogSwitch = "Error";
+                        String message = "エラーが発生しました。お手数ですが電波状況が良いところでもう一度操作をやり直してみて下さい。";
+                        showDialog("Error", message, 0);
+                    }
+
+                    @Override
+                    public void onFinish() {
+                        // TODO Auto-generated method stub
+                        
+                    }
+				}, this, i, size));
+				
 				if (answer_flag == 1){ // 正解の場合
 					rightCount++; // カウント+1
 				}else{ // 不正解のときは問題を記録
@@ -346,17 +375,19 @@ public class TestListActivity extends Activity implements DialogListener{
 				}
 			}
 		}
-		progressDialog.dismiss(); // ProgressDialogを閉じる
 		
-		Intent intent = new Intent(TestListActivity.this, TestResultActivity.class);
-		intent.putExtra("size", size); // データ件数
-		intent.putExtra("rightCount", rightCount); // 正解数
-		intent.putExtra("year", year);
-		intent.putExtra("grade", grade);
-		TestData testData = TestData.getInstance(); // テストデータクラスを読み込み
-		testData.setRootData(questionData); // クラスに値を保存
-		startActivity(intent);
-		TestListActivity.this.finish();
+		// エラーが無ければ結果画面へ遷移
+		if (!DialogSwitch.equals("Error")){
+		    Intent intent = new Intent(TestListActivity.this, TestResultActivity.class);
+	        intent.putExtra("size", size); // データ件数
+	        intent.putExtra("rightCount", rightCount); // 正解数
+	        intent.putExtra("year", year);
+	        intent.putExtra("grade", grade);
+	        TestData testData = TestData.getInstance(); // テストデータクラスを読み込み
+	        testData.setRootData(questionData); // クラスに値を保存
+	        startActivity(intent);
+	        TestListActivity.this.finish();
+		}
 	}
 	
 

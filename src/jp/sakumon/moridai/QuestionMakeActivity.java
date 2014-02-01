@@ -1,5 +1,7 @@
 package jp.sakumon.moridai;
 
+import jp.sakumon.moridai.MyJsonHttpResponseHandler.MyJsonResponseCallback;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -106,41 +108,55 @@ public class QuestionMakeActivity extends Activity implements DialogListener{
 			params.put("category_id", String.valueOf(category_id));
 			params.put("quiz_type", "private");
 			
-			String url = "http://n0.x0.to/rskweb/moridai/quiz_create.json";
+			String url = "http://sakumon.jp/app/maker/moridai/quiz_create.json";
 			
-			client.post(url, params, new MyJsonResponseHandler(this){
-				@Override
-				public void onSuccess(JSONObject json){
-					try {
-						String response = json.getString("response"); // サーバからの結果
-						if (response.equals("Saved")){ // 回答情報登録できたとき
-						    DialogSwitch = "add";
-						    String title = "登録完了！";
-		                    String message = "問題の登録が完了しました！あなただけのオリジナル問題を更に作成しましょう！";
-		                    showDialog(title, message, 0);
-						}else if (response.equals("Error")){ // 問題登録できないとき（サーバ側のエラー）
-						    DialogSwitch = "Error";
+			client.post(url, params, new MyJsonHttpResponseHandler(new MyJsonResponseCallback() {
+
+                @Override
+                public void onStart() {
+                    // TODO Auto-generated method stub
+                    
+                }
+
+                @Override
+                public void onSuccess(JSONObject json) {
+                    try {
+                        String response = json.getString("response"); // サーバからの結果
+                        if (response.equals("Saved")){ // 回答情報登録できたとき
+                            DialogSwitch = "add";
+                            String title = "登録完了！";
+                            String message = "問題の登録が完了しました！あなただけのオリジナル問題を更に作成しましょう！";
+                            showDialog(title, message, 0);
+                        }else if (response.equals("Error")){ // 問題登録できないとき（サーバ側のエラー）
+                            DialogSwitch = "Error";
                             String message = "サーバへのアクセスに失敗しました。お手数ですがやり直してみて下さい。";
                             showDialog("Error", message, 0);
-						}else if (response.equals("Data is Empty")){ // 問題登録できないとき（プログラム側のエラー）
-						    DialogSwitch = "Error";
+                        }else if (response.equals("Data is Empty")){ // 問題登録できないとき（プログラム側のエラー）
+                            DialogSwitch = "Error";
                             String message = "データが送られていません。お手数ですが最初からやり直してみて下さい。";
                             showDialog("Error", message, 0);
-						}
-					} catch (JSONException e) {
-					    DialogSwitch = "Error";
+                        }
+                    } catch (JSONException e) {
+                        DialogSwitch = "Error";
                         String message = "何らかのエラーが発生しました。お手数ですがもう一度やり直して下さい。";
                         showDialog("Error", message, 0);
-					}
-				}
-				
-				@Override
-				public void onFailure(Throwable e, String response){
-				    DialogSwitch = "Error";
+                    }
+                }
+
+                @Override
+                public void onFailure(Throwable e, String response) {
+                    DialogSwitch = "Error";
                     String message = "エラーが発生しました。お手数ですが電波状況が良いところでもう一度操作をやり直してみて下さい。";
                     showDialog("Error", message, 0);
-				}
-			});
+                }
+
+                @Override
+                public void onFinish() {
+                    // TODO Auto-generated method stub
+                    
+                }
+			    
+			}, this, 0, 1));
 		}
 	}
 	

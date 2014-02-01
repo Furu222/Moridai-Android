@@ -1,5 +1,7 @@
 package jp.sakumon.moridai;
 
+import jp.sakumon.moridai.MyJsonHttpResponseHandler.MyJsonResponseCallback;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -27,6 +29,7 @@ public class AnswerResultActivity extends Activity implements android.view.View.
 	String rightAnswerStr; // 正解選択肢
 	Integer answerFlag; // 正解判定 0:正解, 1:不正解
 	String format; // 問題形式
+	Integer userId; // ユーザID
 	private int year;
 	private int grade;
 	
@@ -52,7 +55,7 @@ public class AnswerResultActivity extends Activity implements android.view.View.
 		grade = intent.getIntExtra("grade", -1);
 		
 		// プリファレンスからユーザIDを呼び出し
-		Integer userId = new GetSharedPreferences().getUserId(this);
+		userId = new GetSharedPreferences().getUserId(this);
 		questionId = intent.getStringExtra("questionId");
 		format = intent.getStringExtra("format");
 		
@@ -79,50 +82,66 @@ public class AnswerResultActivity extends Activity implements android.view.View.
 				answerFlag = 0;
 			}
 		}
-		
-		// HTTP通信で回答情報送信
-		AsyncHttpClient client = new AsyncHttpClient();
-		RequestParams params = new RequestParams();
-		
-		params.put("user_id", Integer.toString(userId));
-		params.put("question_id", questionId);
-		params.put("category_id", Integer.toString(categoryId));
-		params.put("answer_flag", Integer.toString(answerFlag));
-		if (format.equals("multiple-choice")){ // 多肢選択式の場合
-			params.put("answer_option", Integer.toString(answerNum));
-		}else{
-			params.put("answer_word", answer);
-		}
-		params.put("answer_type", "0");
-		params.put("client_type", "Android");
-		
-		String url = "http://n0.x0.to/rskweb/moridai/answer_check.json";
-		
-		client.post(url, params, new MyJsonResponseHandler(this){
-			@Override
-			public void onSuccess(JSONObject json){
-				// 通信成功時の処理
-				try {
-					String response = json.getString("response"); // サーバからの結果
-					if (response.equals("Saved")){ // 回答情報登録できたとき
-						setContentView();
-					}else if (response.equals("Error")){ // 回答情報登録できないとき（サーバ側のエラー）
-					    String title = "Error";
-	                    String message = "サーバへのアクセスに失敗しました。お手数ですがやり直してみて下さい。";
-	                    showDialog(title, message, 0);
-					}else if (response.equals("Data is Empty")){ // 回答情報登録できないとき（プログラム側のエラー）
-					    String title = "Error";
+        AsyncHttpClient client = new AsyncHttpClient();
+        RequestParams params = new RequestParams();
+        
+        params.put("user_id", Integer.toString(userId));
+        params.put("question_id", questionId);
+        params.put("category_id", Integer.toString(categoryId));
+        params.put("answer_flag", Integer.toString(answerFlag));
+        if (format.equals("multiple-choice")){ // 多肢選択式の場合
+            params.put("answer_option", Integer.toString(answerNum));
+        }else{
+            params.put("answer_word", answer);
+        }
+        params.put("answer_type", "0");
+        params.put("client_type", "Android");
+        
+        String url = "http://sakumon.jp/app/maker/moridai/answer_check.json";
+        
+        client.post(url, params, new MyJsonHttpResponseHandler(new MyJsonResponseCallback() {
+            @Override
+            public void onSuccess(JSONObject json) {
+                // 通信成功時の処理
+                try {
+                    String response = json.getString("response"); // サーバからの結果
+                    if (response.equals("Saved")){ // 回答情報登録できたとき
+                        setContentView();
+                    }else if (response.equals("Error")){ // 回答情報登録できないとき（サーバ側のエラー）
+                        String title = "Error";
+                        String message = "サーバへのアクセスに失敗しました。お手数ですがやり直してみて下さい。";
+                        showDialog(title, message, 0);
+                    }else if (response.equals("Data is Empty")){ // 回答情報登録できないとき（プログラム側のエラー）
+                        String title = "Error";
                         String message = "データが送られていません。お手数ですが最初からやり直してみて下さい。";
                         showDialog(title, message, 0);
-					}
-				} catch (JSONException e) {
-					//new AlertDialog.Builder(QuestionAnswerActivity.this).setTitle("Error").setMessage(e.toString()).setPositiveButton("OK", null).show();
-				    String title = "Error";
+                    }
+                } catch (JSONException e) {
+                    //new AlertDialog.Builder(QuestionAnswerActivity.this).setTitle("Error").setMessage(e.toString()).setPositiveButton("OK", null).show();
+                    String title = "Error";
                     String message = "何らかのエラーが発生しました。お手数ですがもう一度やり直して下さい。";
                     showDialog(title, message, 0);
-				}
-			}
-		});
+                }
+            }
+            
+            @Override
+            public void onStart() {
+                // TODO Auto-generated method stub
+                
+            }
+            
+            @Override
+            public void onFinish() {
+                // TODO Auto-generated method stub
+                
+            }
+            
+            @Override
+            public void onFailure(Throwable e, String response) {
+                String message = "エラーが発生しました。お手数ですが電波状況が良いところでもう一度操作をやり直してみて下さい。";
+                showDialog("Error", message, 0);
+            }
+        }, this, 0, 1));
 	}
 
 	/**

@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
+import jp.sakumon.moridai.MyJsonHttpResponseHandler.MyJsonResponseCallback;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -33,6 +35,7 @@ public class QuestionAnswerActivity extends Activity implements OnClickListener,
 	private int year;
 	private int grade;
 	String format; // 問題のフォーマット
+	Integer userId;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -44,115 +47,130 @@ public class QuestionAnswerActivity extends Activity implements OnClickListener,
 		// 前の画面のデータ取得
 		int category_id = intent.getIntExtra("category_id", 0);
 		// プリファレンスからユーザIDを呼び出し
-		Integer userId = new GetSharedPreferences().getUserId(this);
+		userId = new GetSharedPreferences().getUserId(this);
 		year = intent.getIntExtra("year", -1);
 		grade = intent.getIntExtra("grade", -1);
 		
-		// HTTP通信
-		AsyncHttpClient client = new AsyncHttpClient();
-		RequestParams params = new RequestParams();
-		
-		if (category_id == 0){ // IntentでうまくカテゴリーIDを渡されてないとき
-		    String title = "Error";
+        // HTTP通信
+        AsyncHttpClient client = new AsyncHttpClient();
+        RequestParams params = new RequestParams();
+
+        if (category_id == 0){ // IntentでうまくカテゴリーIDを渡されてないとき
+            String title = "Error";
             String message = "エラーが発生しました。お手数ですがもう一度操作をやり直してみて下さい。前の画面へ戻ります。";
             showDialog(title, message, 0);
-		}
-		String url = new String();
-		if (year == 0){ // 入門編の場合
-			params.put("category_id", Integer.toString(category_id));
-			params.put("user_id", Integer.toString(userId));
-			url = "http://n0.x0.to/rskweb/moridai/question.json";
-		}else{
-			params.put("grade", Integer.toString(grade));
-			params.put("year", Integer.toString(year));
-			params.put("category_id", Integer.toString(category_id));
-			url = "http://n0.x0.to/rskweb/moridai/pasttest/" + grade + "/" + year +"/" + category_id + ".json";
-		}
+        }
+        String url = new String();
+        if (year == 0){ // 入門編の場合
+            params.put("category_id", Integer.toString(category_id));
+            params.put("user_id", Integer.toString(userId));
+            url = "http://sakumon.jp/app/maker/moridai/question.json";
+        }else{
+            params.put("grade", Integer.toString(grade));
+            params.put("year", Integer.toString(year));
+            params.put("category_id", Integer.toString(category_id));
+            url = "http://sakumon.jp/app/maker/moridai/pasttest/" + grade + "/" + year +"/" + category_id + ".json";
+        }
+        
+        client.get(url, params, new MyJsonHttpResponseHandler(new MyJsonResponseCallback() {
+            @Override
+            public void onSuccess(JSONObject json) {
+                // 通信成功時の処理
+                try {
+                    JSONObject rootObject = json.getJSONObject("response");
+                    JSONObject object = rootObject.getJSONObject("MoridaiQuestion");
+                    
+                    if (year != 0){ // 過去問の場合はフォーマットをセット
+                        format = object.getString("format");
+                    }else{ // 入門編の場合はMultiple-choiceに
+                        format = "multiple-choice";
+                    }
+                    // 共通データ格納
+                    data.put("id", object.getString("id"));
+                    data.put("question", object.getString("question"));
+                    data.put("right_answer", object.getString("right_answer"));
+                    data.put("description", object.getString("description"));
+                    data.put("category_id", object.getString("category_id"));
+                    
+                    if (format.equals("multiple-choice")){ // 多肢選択式の場合(入門編も)
+                        // Viewをセット
+                        setContentView(R.layout.multiple_answer);
 
-		client.get(url, params, new MyJsonResponseHandler(this){
-			@Override
-			public void onSuccess(JSONObject json){
-				// 通信成功時の処理
-				try {
-					JSONObject rootObject = json.getJSONObject("response");
-					JSONObject object = rootObject.getJSONObject("MoridaiQuestion");
-					if (year != 0){ // 過去問の場合はフォーマットをセット
-						format = object.getString("format");
-					}else{ // 入門編の場合はMultiple-choiceに
-						format = "multiple-choice";
-					}
-					
-					// 共通データ格納
-					data.put("id", object.getString("id"));
-					data.put("question", object.getString("question"));
-					data.put("right_answer", object.getString("right_answer"));
-					data.put("description", object.getString("description"));
-					data.put("category_id", object.getString("category_id"));
-					
-					if (format.equals("multiple-choice")){ // 多肢選択式の場合(入門編も)
-						// Viewをセット
-						setContentView(R.layout.multiple_answer);
-						
-						// ClicKListenerをセット
-						option1Button = (ImageButton)findViewById(R.id.option1);
-						option1Button.setOnClickListener(QuestionAnswerActivity.this);
-						option2Button = (ImageButton)findViewById(R.id.option2);
-						option2Button.setOnClickListener(QuestionAnswerActivity.this);
-						option3Button = (ImageButton)findViewById(R.id.option3);
-						option3Button.setOnClickListener(QuestionAnswerActivity.this);
-						option4Button = (ImageButton)findViewById(R.id.option4);
-						option4Button.setOnClickListener(QuestionAnswerActivity.this);
-						
-						// 選択肢データを連想配列に格納
-						data.put("option1", object.getString("option1"));
-						data.put("option2", object.getString("option2"));
-						data.put("option3", object.getString("option3"));
-						data.put("option4", object.getString("option4"));
-						
-					}else{ // 一問一答の場合
-						// Viewをセット
-						setContentView(R.layout.single_answer);
-						
-						// EditTextの入力イベントを取得
-						answerEditText = (EditText)findViewById(R.id.answerEditText);
-						// 答えをTextViewに書き換える
-						answerEditText.addTextChangedListener(new TextWatcher(){
+                        // ClicKListenerをセット
+                        option1Button = (ImageButton)findViewById(R.id.option1);
+                        option1Button.setOnClickListener(QuestionAnswerActivity.this);
+                        option2Button = (ImageButton)findViewById(R.id.option2);
+                        option2Button.setOnClickListener(QuestionAnswerActivity.this);
+                        option3Button = (ImageButton)findViewById(R.id.option3);
+                        option3Button.setOnClickListener(QuestionAnswerActivity.this);
+                        option4Button = (ImageButton)findViewById(R.id.option4);
+                        option4Button.setOnClickListener(QuestionAnswerActivity.this);
+                        
+                        // 選択肢データを連想配列に格納
+                        data.put("option1", object.getString("option1"));
+                        data.put("option2", object.getString("option2"));
+                        data.put("option3", object.getString("option3"));
+                        data.put("option4", object.getString("option4"));
+                        
+                    }else{ // 一問一答の場合
+                        // Viewをセット
+                        setContentView(R.layout.single_answer);
+                        
+                        // EditTextの入力イベントを取得
+                        answerEditText = (EditText)findViewById(R.id.answerEditText);
+                        // 答えをTextViewに書き換える
+                        answerEditText.addTextChangedListener(new TextWatcher(){
+                            @Override
+                            public void afterTextChanged(Editable s) {
+                                TextView tv = (TextView)findViewById(R.id.answerCheckLabel);
+                                if (s.toString().equals("")){ // 空白のとき
+                                    tv.setText(R.string.single_answer_check_label);
+                                }else{
+                                    tv.setText(s);
+                                }
+                            }
 
-							@Override
-							public void afterTextChanged(Editable s) {
-								TextView tv = (TextView)findViewById(R.id.answerCheckLabel);
-								if (s.toString().equals("")){ // 空白のとき
-									tv.setText(R.string.single_answer_check_label);
-								}else{
-									tv.setText(s);
-								}
-							}
+                            @Override
+                            public void beforeTextChanged(CharSequence s,
+                                    int start, int count, int after) {
+                                
+                            }
 
-							@Override
-							public void beforeTextChanged(CharSequence s,
-									int start, int count, int after) {
-								
-							}
-
-							@Override
-							public void onTextChanged(CharSequence s,
-									int start, int before, int count) {
-								
-							}
-							
-						});
-						// ボタンを設定
-						singleAnswerButton = (Button)findViewById(R.id.singleAnswerButton);
-						singleAnswerButton.setOnClickListener(QuestionAnswerActivity.this);
-					}
-					setViewProblem(); // 連想配列をビューに表示
-				} catch (JSONException e) {
-					String title = "Error";
-					String message = "このカテゴリーは問題がありません。違うカテゴリーを選択してください。";
-					showDialog(title, message, 0);
-				}
-			}
-		});
+                            @Override
+                            public void onTextChanged(CharSequence s,
+                                    int start, int before, int count) {
+                            }
+                        });
+                        // ボタンを設定
+                        singleAnswerButton = (Button)findViewById(R.id.singleAnswerButton);
+                        singleAnswerButton.setOnClickListener(QuestionAnswerActivity.this);
+                    }
+                    setViewProblem(); // 連想配列をビューに表示
+                } catch (JSONException e) {
+                    String title = "Error";
+                    String message = "このカテゴリーは問題がありません。違うカテゴリーを選択してください。";
+                    showDialog(title, message, 0);
+                }
+            }
+            
+            @Override
+            public void onStart() {
+                // TODO Auto-generated method stub
+                
+            }
+            
+            @Override
+            public void onFinish() {
+                // TODO Auto-generated method stub
+                
+            }
+            
+            @Override
+            public void onFailure(Throwable e, String response) {
+                String message = "エラーが発生しました。お手数ですが電波状況が良いところでもう一度操作をやり直してみて下さい。";
+                showDialog("Error", message, 0);
+            }
+        }, this, 0, 1));
 	}
 
 	@Override

@@ -41,20 +41,20 @@ public class MyDialogFragment extends DialogFragment{
             .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    // OKボタンが押された時
-                    listener.doPositiveClick();
                     //dismiss();
                     getDialog().dismiss();
+                    // OKボタンが押された時
+                    listener.doPositiveClick();
                 }
             });
 	    if (type == 1){ // NGボタンも付ける場合
 	        alert.setNegativeButton("キャンセル", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    // Cancelボタンが押された時
-                    listener.doNegativeClick();
                     //dismiss();
                     getDialog().dismiss();
+                    // Cancelボタンが押された時
+                    listener.doNegativeClick();
                 }
             });
 	    }

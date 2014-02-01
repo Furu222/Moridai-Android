@@ -17,7 +17,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class TestAnswerActivity extends Activity implements OnClickListener{
 	
@@ -279,7 +278,7 @@ public class TestAnswerActivity extends Activity implements OnClickListener{
 		
 		startActivity(intent);	
 		finish();
-		Toast.makeText(this, "問題" + (position + 1) + "に解答しました。", Toast.LENGTH_SHORT).show();
+		//Toast.makeText(this, "問題" + (position + 1) + "に解答しました。", Toast.LENGTH_SHORT).show();
 	}
 
 }
