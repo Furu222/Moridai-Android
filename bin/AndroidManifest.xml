@@ -53,8 +53,8 @@
         <activity
             android:name="jp.sakumon.moridai.QuestionAnswerActivity"
             android:label="@string/app_name"
-            android:windowSoftInputMode="adjustPan"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" >
         </activity>
         <activity
             android:name="jp.sakumon.moridai.AnswerResultActivity"
@@ -69,8 +69,8 @@
         <activity
             android:name="jp.sakumon.moridai.TestAnswerActivity"
             android:label="@string/app_name"
-            android:windowSoftInputMode="adjustPan"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" >
         </activity>
         <activity
             android:name="jp.sakumon.moridai.QuestionMakeActivity"
@@ -103,6 +103,12 @@
             android:name="jp.sakumon.moridai.TestGradeListActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="jp.sakumon.moridai.NewUserActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" >
         </activity>
     </application>
 

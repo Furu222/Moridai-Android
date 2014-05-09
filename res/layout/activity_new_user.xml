@@ -1,0 +1,159 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:layout_weight="1">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".NewUserActivity" >
+
+    <TextView
+        android:id="@+id/titile_comment_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/user_entry_label"
+        android:layout_centerHorizontal="true"
+        android:text="@string/title_comment"
+        android:textColor="@color/white" />
+
+    <TextView
+        android:id="@+id/user_entry_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:text="@string/entry_title"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/white" />
+
+    <TextView
+        android:id="@+id/user_comment_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/user_label"
+        android:layout_alignBottom="@+id/user_label"
+        android:layout_toRightOf="@+id/user_label"
+        android:text="@string/new_name_side"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="@color/white" />
+
+    <EditText
+        android:id="@+id/pass_form"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/pass_label"
+        android:layout_alignRight="@+id/user_form"
+        android:layout_below="@+id/pass_label"
+        android:background="@drawable/rounded_corner"
+        android:ems="13"
+        android:hint="@string/new_pass_text_hint"
+        android:inputType="textPassword"
+        android:maxLength="140"
+        android:minHeight="30dp" >
+
+        <requestFocus />
+    </EditText>
+
+    <TextView
+        android:id="@+id/user_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/user_form"
+        android:layout_below="@+id/titile_comment_label"
+        android:layout_marginTop="18dp"
+        android:text="@string/new_name"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/white" />
+
+    <EditText
+        android:id="@+id/user_form"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/user_label"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/rounded_corner"
+        android:ems="13"
+        android:hint="@string/new_name_text_hint"
+        android:inputType="textPersonName"
+        android:maxLength="140"
+        android:minHeight="30dp" />
+
+    <TextView
+        android:id="@+id/pass_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/user_form"
+        android:layout_below="@+id/user_form"
+        android:layout_marginTop="16dp"
+        android:text="@string/new_pass"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/white" />
+
+    <EditText
+        android:id="@+id/pass2_form"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/pass2_label"
+        android:layout_alignLeft="@+id/pass2_label"
+        android:layout_alignRight="@+id/pass_form"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/rounded_corner"
+        android:ems="13"
+        android:hint="@string/new_pass2_text_hint"
+        android:inputType="textPassword"
+        android:maxLength="140"
+        android:minHeight="30dp" />
+
+    <TextView
+        android:id="@+id/pass2_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/pass_form"
+        android:layout_marginTop="16dp"
+        android:layout_alignLeft="@+id/pass_form"
+        android:text="@string/new_pass2"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/white" />
+
+    <TextView
+        android:id="@+id/email_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/pass2_form"
+        android:layout_alignLeft="@+id/pass2_form"
+        android:text="@string/new_email"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/white" />
+
+    <Button
+        android:id="@+id/entry_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/email_form"
+        android:layout_marginBottom="22dp"
+        android:layout_marginTop="30dp"
+        android:layout_toRightOf="@+id/pass_label"
+        android:text="@string/entry"
+        android:textColor="@color/white" />
+
+    <EditText
+        android:id="@+id/email_form"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/email_label"
+        android:layout_alignLeft="@+id/email_label"
+        android:background="@drawable/rounded_corner"
+        android:ems="13"
+        android:hint="@string/new_email_text_hint"
+        android:inputType="textEmailAddress"
+        android:maxLength="140"
+        android:minHeight="30dp" />
+
+</RelativeLayout>
+</ScrollView>

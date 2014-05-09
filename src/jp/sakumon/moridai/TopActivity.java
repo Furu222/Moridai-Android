@@ -41,7 +41,7 @@ public class TopActivity extends Activity implements OnClickListener{
 	@Override
 	public void onClick(View v) {
 		// TODO 自動生成されたメソッド・スタブ
-		Intent intent = new Intent(this, MainActivity.class);
+		Intent intent = new Intent(this, NewUserActivity.class);
 		startActivity(intent);
 		this.finish(); // Activityの終了（戻るボタンで戻らないようにする）
 	}
