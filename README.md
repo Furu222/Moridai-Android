@@ -11,9 +11,9 @@ Readmeも積極的に編集していきましょう。
 
 
 ## ブランチについて
-- master    : リリース版
-- developer : 次リリース版
-- future-*  : 新規機能の開発用
+- master : リリース版
+- develop : 次リリース版
+- feature-* : 新規機能の開発用
 
 ## 更新履歴(master)
 - 2014/2/1
