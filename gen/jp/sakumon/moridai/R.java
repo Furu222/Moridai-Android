@@ -164,6 +164,11 @@ public final class R {
     public static final class dimen {
         /**  Default screen margins, per the Android Design guidelines. 
 
+         Example customization of dimensions originally defined in res/values/dimens.xml
+         (such as screen margins) for screens with more than 820dp of available width. This
+         would include 7" and 10" devices in landscape (~960dp and ~1280dp respectively).
+    
+
          Customize dimensions originally defined in res/values/dimens.xml (such as
          screen margins) for sw720dp devices (e.g. 10" tablets) in landscape here.
     
@@ -209,26 +214,26 @@ public final class R {
         public static final int AnswerNextButton=0x7f0b0013;
         public static final int AnswerText=0x7f0b000e;
         public static final int CategoryBackButton=0x7f0b0011;
-        public static final int CategoryList=0x7f0b0044;
+        public static final int CategoryList=0x7f0b0045;
         public static final int DescriptionText=0x7f0b0012;
         public static final int FormLabel=0x7f0b0000;
-        public static final int FragmentMakeButton=0x7f0b0046;
-        public static final int FragmentMakeLabel=0x7f0b0045;
-        public static final int FragmentTestButton=0x7f0b0048;
-        public static final int FragmentTestLabel=0x7f0b0047;
+        public static final int FragmentMakeButton=0x7f0b0047;
+        public static final int FragmentMakeLabel=0x7f0b0046;
+        public static final int FragmentTestButton=0x7f0b0049;
+        public static final int FragmentTestLabel=0x7f0b0048;
         public static final int SubTitle=0x7f0b0040;
         public static final int TestList=0x7f0b0036;
         public static final int TitleText=0x7f0b003f;
-        public static final int action_settings=0x7f0b005a;
+        public static final int action_settings=0x7f0b005f;
         public static final int address=0x7f0b000a;
         public static final int addressLabel=0x7f0b0009;
         public static final int addressSearchButton=0x7f0b0008;
         public static final int addressSignButton=0x7f0b003e;
-        public static final int answerCheckLabel=0x7f0b0056;
+        public static final int answerCheckLabel=0x7f0b005b;
         public static final int answerConfirmLabel=0x7f0b0024;
         public static final int answerConfirmText=0x7f0b0025;
-        public static final int answerEditText=0x7f0b0055;
-        public static final int answerLabel=0x7f0b0054;
+        public static final int answerEditText=0x7f0b005a;
+        public static final int answerLabel=0x7f0b0059;
         public static final int answerMakeLabel=0x7f0b0031;
         public static final int answerMakeTextField=0x7f0b0030;
         public static final int answerSmallLabel=0x7f0b0034;
@@ -236,6 +241,7 @@ public final class R {
         public static final int attendText=0x7f0b0002;
         public static final int categoryMakeLabel=0x7f0b002b;
         public static final int categorySpinner=0x7f0b002c;
+        public static final int container=0x7f0b0044;
         public static final int descriptionAnswerScrollView=0x7f0b000f;
         public static final int descriptionConfirmLabel=0x7f0b0026;
         public static final int descriptionConfirmText=0x7f0b0029;
@@ -247,22 +253,22 @@ public final class R {
         public static final int email_form=0x7f0b0020;
         public static final int email_label=0x7f0b001e;
         public static final int entry_button=0x7f0b001f;
-        public static final int expandableListView1=0x7f0b0049;
+        public static final int expandableListView1=0x7f0b004e;
         public static final int imageView1=0x7f0b0042;
-        public static final int menu_make_check=0x7f0b0059;
-        public static final int menu_settings=0x7f0b0058;
-        public static final int menu_test_check=0x7f0b005b;
+        public static final int menu_make_check=0x7f0b005e;
+        public static final int menu_settings=0x7f0b005d;
+        public static final int menu_test_check=0x7f0b0060;
         public static final int moriken=0x7f0b0043;
         public static final int name=0x7f0b0004;
         public static final int nameLabel=0x7f0b0003;
-        public static final int option1=0x7f0b004b;
-        public static final int option2=0x7f0b004c;
-        public static final int option3=0x7f0b004d;
-        public static final int option4=0x7f0b004e;
-        public static final int option_text1=0x7f0b0053;
-        public static final int option_text2=0x7f0b0050;
-        public static final int option_text3=0x7f0b0051;
-        public static final int option_text4=0x7f0b0052;
+        public static final int option1=0x7f0b0050;
+        public static final int option2=0x7f0b0051;
+        public static final int option3=0x7f0b0052;
+        public static final int option4=0x7f0b0053;
+        public static final int option_text1=0x7f0b0058;
+        public static final int option_text2=0x7f0b0055;
+        public static final int option_text3=0x7f0b0056;
+        public static final int option_text4=0x7f0b0057;
         public static final int pager=0x7f0b0014;
         public static final int pass2_form=0x7f0b001c;
         public static final int pass2_label=0x7f0b001d;
@@ -271,7 +277,7 @@ public final class R {
         public static final int postCode=0x7f0b0007;
         public static final int postCodeLabel=0x7f0b0005;
         public static final int postCodeSmallLabel=0x7f0b0006;
-        public static final int question=0x7f0b004f;
+        public static final int question=0x7f0b0054;
         public static final int questionConfirm=0x7f0b0023;
         public static final int questionConfirmArea=0x7f0b0021;
         public static final int questionList=0x7f0b003d;
@@ -280,17 +286,21 @@ public final class R {
         public static final int questionScrollView=0x7f0b0022;
         public static final int questionSmallLabel=0x7f0b002e;
         public static final int questionTexitField=0x7f0b002f;
-        public static final int question_area=0x7f0b004a;
+        public static final int question_area=0x7f0b004f;
+        public static final int radioButton1=0x7f0b004c;
+        public static final int radioButton2=0x7f0b004b;
+        public static final int radioButton3=0x7f0b004d;
         public static final int resultCorrectLabel=0x7f0b003a;
         public static final int resultImage=0x7f0b0037;
         public static final int resultText=0x7f0b003b;
         public static final int resultYouLabel=0x7f0b0038;
         public static final int rightCount=0x7f0b0039;
         public static final int sendButton=0x7f0b000b;
-        public static final int singleAnswerButton=0x7f0b0057;
+        public static final int singleAnswerButton=0x7f0b005c;
         public static final int startButton=0x7f0b0041;
         public static final int testEnd=0x7f0b002a;
         public static final int testResultBack=0x7f0b0028;
+        public static final int textView1=0x7f0b004a;
         public static final int titile_comment_label=0x7f0b0015;
         public static final int user_comment_label=0x7f0b0017;
         public static final int user_entry_label=0x7f0b0016;
@@ -307,15 +317,17 @@ public final class R {
         public static final int activity_test_list=0x7f030006;
         public static final int activity_test_result=0x7f030007;
         public static final int activity_top=0x7f030008;
-        public static final int category_list=0x7f030009;
-        public static final int expandablelist_row=0x7f03000a;
-        public static final int fragment_make=0x7f03000b;
-        public static final int fragment_test=0x7f03000c;
-        public static final int grade_list=0x7f03000d;
-        public static final int multiple_answer=0x7f03000e;
-        public static final int row=0x7f03000f;
-        public static final int row_checked=0x7f030010;
-        public static final int single_answer=0x7f030011;
+        public static final int activity_user_login=0x7f030009;
+        public static final int category_list=0x7f03000a;
+        public static final int expandablelist_row=0x7f03000b;
+        public static final int fragment_make=0x7f03000c;
+        public static final int fragment_test=0x7f03000d;
+        public static final int fragment_user_login=0x7f03000e;
+        public static final int grade_list=0x7f03000f;
+        public static final int multiple_answer=0x7f030010;
+        public static final int row=0x7f030011;
+        public static final int row_checked=0x7f030012;
+        public static final int single_answer=0x7f030013;
     }
     public static final class menu {
         public static final int activity_address_sign=0x7f0a0000;
@@ -325,6 +337,7 @@ public final class R {
         public static final int main_menu=0x7f0a0004;
         public static final int new_user=0x7f0a0005;
         public static final int test_list_menu=0x7f0a0006;
+        public static final int user_login=0x7f0a0007;
     }
     public static final class string {
         public static final int LoginButton=0x7f070005;
