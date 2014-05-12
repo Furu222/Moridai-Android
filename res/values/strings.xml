@@ -79,5 +79,21 @@
     <string name="single_answer_label">解答</string>
     <string name="single_answer_check_label">ここに入力した答えが表示されます</string>
     <string name="single_answer_button">解答を確定する</string>
+    <string name="title_activity_new_user">NewUserActivity</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    
+    <string name="new_name">ユーザ名</string>
+    <string name="new_pass">パスワード</string>
+    <string name="new_email">メールアドレス</string>
+    <string name="entry">登録</string>
+    <string name="new_pass2">パスワード確認</string>
+    <string name="new_name_text_hint">ユーザ名を入力してください。</string>
+    <string name="new_pass_text_hint">パスワードを入力してください。</string>
+    <string name="new_pass2_text_hint">パスワードを入力してください。</string>
+    <string name="new_email_text_hint">moridai@sakumon.com</string>
+    <string name="new_name_side">（半角英数字）</string>
+    <string name="entry_title">ユーザ新規登録</string>
+    <string name="title_comment">アカウント情報を入力してください</string>
 
 </resources>
